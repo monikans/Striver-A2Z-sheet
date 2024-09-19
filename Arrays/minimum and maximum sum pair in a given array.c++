@@ -3,11 +3,12 @@
 using namespace std;
 int maxmin(vector<int>arr)
 {
+    int n= arr.size();
     sort(arr.begin(),arr.end());
    int mini = arr[0]+arr[1];
-   int maxi = arr[arr.size()-1]+arr[arr.size()-2];
+   int maxi = arr[n-1]+arr[n-2];
    cout << arr[0] <<"+"<<arr[1] <<"=" << mini <<endl;
-   cout<< arr[arr.size()-2] << "+"<<arr[arr.size()-1] <<"="<< maxi <<endl;
+   cout<< arr[n-2] << "+"<<arr[n-1] <<"="<< maxi <<endl;
   return 0;
 }
 int main()
@@ -16,7 +17,7 @@ int main()
     cout<< "emter n: " ;
     cin>>n;
     vector<int>arr(n);
-    cout<<"enter each ele: ";
+    cout<<"enter each element: ";
     for(int i=0;i<n;i++)
     {
         cin>>arr[i];
