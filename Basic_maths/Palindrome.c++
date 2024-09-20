@@ -41,7 +41,7 @@ int main()
 }
 
 
-//brute force approach
+//optimized approach
 //Time complexity is O(n)
 //space complexity is O(1)
 
