@@ -26,6 +26,7 @@ void insertAtEnd(int value) {
     Node* newNode = new Node();
     newNode->data = value;
     newNode->next = nullptr;
+    newNode->prev = nullptr;
 
     if (head == nullptr) {
         newNode->prev = nullptr;
@@ -56,6 +57,40 @@ void insertAfterValue(int value, int afterValue) {
 
     Node* newNode = new Node();
     newNode->data = value;
+    newNode->next = temp->next;
+    newNode->prev = temp;
+
+    if (temp->next != nullptr) {
+        temp->next->prev = newNode;
+    }
+
+    temp->next = newNode;
+}
+void insertAtPosition(int value, int position) {
+    Node* newNode = new Node();
+    newNode->data = value;
+    newNode->prev = nullptr;
+    newNode->next = nullptr;
+
+    if (position == 1) {
+        insertAtBeginning(value);
+        return;
+    }
+
+    Node* temp = head;
+    int count = 1;
+
+    // Traverse to the position before where we want to insert
+    while (temp != nullptr && count < position - 1) {
+        temp = temp->next;
+        count++;
+    }
+
+    if (temp == nullptr) {
+        cout << "Position " << position << " is out of bounds." << endl;
+        return;
+    }
+
     newNode->next = temp->next;
     newNode->prev = temp;
 
@@ -141,12 +176,49 @@ void deleteByValue(int value) {
 
     delete temp;
 }
+void deleteAtPosition(int position) {
+    if (head == nullptr) {
+        cout << "List is empty." << endl;
+        return;
+    }
+
+    Node* temp = head;
+
+    if (position == 1) {
+        deleteAtBeginning();
+        return;
+    }
+
+    int count = 1;
+
+    // Traverse to the node at the specified position
+    while (temp != nullptr && count < position) {
+        temp = temp->next;
+        count++;
+    }
+
+    if (temp == nullptr) {
+        cout << "Position " << position << " is out of bounds." << endl;
+        return;
+    }
+
+    if (temp->prev != nullptr) {
+        temp->prev->next = temp->next;
+    }
+
+    if (temp->next != nullptr) {
+        temp->next->prev = temp->prev;
+    }
+
+    delete temp;
+}
 
 int main() {
     insertAtBeginning(10);
     insertAtEnd(20);
     insertAtEnd(30);
     insertAfterValue(25, 20);
+    insertAtPosition(27, 3);
     display();  // Output: 10 <-> 20 <-> 25 <-> 30 <-> NULL
 
     deleteAtBeginning();
@@ -155,6 +227,7 @@ int main() {
     display();  // Output: 20 <-> 25 <-> NULL
     deleteByValue(20);
     display();  // Output: 25 <-> NULL
-
+    deleteAtPosition(2);
+    display();
     return 0;
 }
