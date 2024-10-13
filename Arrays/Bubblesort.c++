@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-void insertion(int n,vector<int>&arr)
+void bubble(int n,vector<int>&arr)
 {
     for(int i=0;i<n-1;i++)
     {
@@ -24,7 +24,7 @@ int main()
     {
         cin>>arr[i];
     }
-    insertion(n,arr);
+    bubble(n,arr);
     cout<<"and the result is: "<<endl;
     for(int i=0;i<n;i++)
     {
